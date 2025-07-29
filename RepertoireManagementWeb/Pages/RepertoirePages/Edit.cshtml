@@ -1,0 +1,58 @@
+﻿@page
+@model RepertoireManagementWeb.Pages.RepertoirePages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Repertoire</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Repertoire.Id" />
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Repertoire.Name" class="control-label"></label>
+                <input asp-for="Repertoire.Name" class="form-control" />
+                <span asp-validation-for="Repertoire.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Repertoire.Description" class="control-label"></label>
+                <input asp-for="Repertoire.Description" class="form-control" />
+                <span asp-validation-for="Repertoire.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Repertoire.ImageUrl" class="control-label"></label>
+                <input asp-for="Repertoire.ImageUrl" class="form-control" />
+                <span asp-validation-for="Repertoire.ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Repertoire.BandId" class="control-label"></label>
+                <select asp-for="Repertoire.BandId" class="form-control" asp-items="ViewBag.BandId"></select>
+                <span asp-validation-for="Repertoire.BandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Repertoire.CreatedAt" class="control-label"></label>
+                <input asp-for="Repertoire.CreatedAt" class="form-control" />
+                <span asp-validation-for="Repertoire.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

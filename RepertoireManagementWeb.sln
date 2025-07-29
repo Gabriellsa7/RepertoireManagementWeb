@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepertoireManagementWeb", "RepertoireManagementWeb\RepertoireManagementWeb.csproj", "{BD16FAA6-7591-463F-9DA9-23E41A224E98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD16FAA6-7591-463F-9DA9-23E41A224E98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD16FAA6-7591-463F-9DA9-23E41A224E98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD16FAA6-7591-463F-9DA9-23E41A224E98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD16FAA6-7591-463F-9DA9-23E41A224E98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01A13BB6-626B-42DC-B6F3-57612A623155}
+	EndGlobalSection
+EndGlobal
