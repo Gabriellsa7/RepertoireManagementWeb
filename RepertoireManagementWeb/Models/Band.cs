@@ -20,7 +20,7 @@ namespace RepertoireManagementWeb.Models
         [ForeignKey("LeaderId")]
         public Guid? LeaderId { get; set; }
 
-        public virtual User? Leader { get; set; }
+        public virtual User Leader { get; set; }
 
         // Tabela de junção automática em EF Core 5+
         [JsonIgnore]

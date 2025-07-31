@@ -39,9 +39,9 @@ namespace RepertoireManagementWeb.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Garante criação automática da coluna "created_at"
-            modelBuilder.Entity<Repertoire>()
-                .Property(r => r.CreatedAt)
-                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            //modelBuilder.Entity<Repertoire>()
+            //    .Property(r => r.CreatedAt)
+            //    .HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

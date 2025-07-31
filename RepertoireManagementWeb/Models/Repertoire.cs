@@ -7,10 +7,10 @@ namespace RepertoireManagementWeb.Models
 {
     public class Repertoire
     {
-        public Repertoire()
-        {
-            CreatedAt = DateTime.UtcNow;
-        }
+        //public Repertoire()
+        //{
+        //    CreatedAt = DateTime.UtcNow;
+        //}
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -30,14 +30,14 @@ namespace RepertoireManagementWeb.Models
         [ForeignKey("BandId")]
         public Guid? BandId { get; set; }
 
-        public virtual Band? Band { get; set; }
+        public virtual Band Band { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<RepertoireMusic> MusicLinks { get; set; } = new HashSet<RepertoireMusic>();
 
-        [Required]
-        [Column("created_at", TypeName = "timestamp")]
-        public DateTime CreatedAt { get; set; }
+        //[Required]
+        //[Column("created_at", TypeName = "timestamp")]
+        //public DateTime CreatedAt { get; set; }
 
     }
 }

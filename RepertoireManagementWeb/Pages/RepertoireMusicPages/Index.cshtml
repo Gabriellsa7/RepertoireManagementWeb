@@ -1,11 +1,11 @@
 ﻿@page
-@model RepertoireManagementWeb.Pages.RepertoirePages.IndexModel
+@model RepertoireManagementWeb.Pages.RepertoireMusicPages.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Repertoire</h1>
+<h1>Repertoire Musics</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,34 +14,34 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Repertoire[0].Name)
+                @Html.DisplayNameFor(model => model.RepertoireMusic[0].OrderInRepertoire)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Repertoire[0].Description)
+                @Html.DisplayNameFor(model => model.RepertoireMusic[0].IsActive)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Repertoire[0].ImageUrl)
+                @Html.DisplayNameFor(model => model.RepertoireMusic[0].Repertoire)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Repertoire[0].Band)
+                @Html.DisplayNameFor(model => model.RepertoireMusic[0].Music)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Repertoire) {
+@foreach (var item in Model.RepertoireMusic) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.OrderInRepertoire)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                @Html.DisplayFor(modelItem => item.Repertoire.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Band.Name)
+                @Html.DisplayFor(modelItem => item.Music.Title)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
