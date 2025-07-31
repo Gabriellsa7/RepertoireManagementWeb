@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RepertoireManagementWeb.Data;
 using RepertoireManagementWeb.Models;
@@ -15,13 +16,14 @@ namespace RepertoireManagementWeb.Pages.BandPages.RepertoirePage
             _context = context;
         }
 
-        [BindProperty]
-        public Repertoire NewRepertoire { get; set; } = new Repertoire();
-
         [BindProperty(SupportsGet = true)]
         public Guid BandId { get; set; }
 
-        public Band? Band { get; set; }
+        [BindProperty]
+        public Guid SelectedRepertoireId { get; set; }
+
+        public Band Band { get; set; } = null!;
+        public SelectList AvailableRepertoires { get; set; } = null!;
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -29,17 +31,26 @@ namespace RepertoireManagementWeb.Pages.BandPages.RepertoirePage
             if (Band == null)
                 return NotFound();
 
+            var repertoires = await _context.Repertoires
+                .Where(r => r.BandId == null)
+                .ToListAsync();
+
+            AvailableRepertoires = new SelectList(repertoires, "Id", "Name");
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             var band = await _context.Bands.FindAsync(BandId);
-            if (band == null)
+            var repertoire = await _context.Repertoires.FindAsync(SelectedRepertoireId);
+
+            if (band == null || repertoire == null)
                 return NotFound();
 
-            NewRepertoire.BandId = BandId;
-            _context.Repertoires.Add(NewRepertoire);
+            // Associa o repertório à banda
+            repertoire.BandId = BandId;
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("/BandPages/Details", new { id = BandId });

@@ -18,10 +18,12 @@
 
   <ItemGroup>
     <Compile Remove="Pages\BandPages\AddMember.cshtml.cs" />
+    <Compile Remove="Pages\BandPages\AddRepertoire.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Pages\BandPages\AddMember.cshtml" />
+    <Content Remove="Pages\BandPages\AddRepertoire.cshtml" />
     <Content Remove="Pages\BandPages\Component.razor" />
   </ItemGroup>
 
