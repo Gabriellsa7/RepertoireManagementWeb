@@ -1,19 +1,19 @@
 ﻿@page
 @model RepertoireManagementWeb.Pages.BandPages.MemberPage.ListMembersModel
 @{
-    ViewData["Title"] = "Membros da Banda";
+    ViewData["Title"] = "Bands Members";
 }
 
-<h1>Membros da Banda: @Model.Band.Name</h1>
+<h1>Bands Members: @Model.Band.Name</h1>
 
 @if (Model.Members.Any())
 {
     <table class="table">
         <thead>
             <tr>
-                <th>Nome</th>
+                <th>Name</th>
                 <th>Email</th>
-                <th>Imagem</th>
+                <th>Image</th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
                         }
                         else
                         {
-                            <span>Sem imagem</span>
+                            <span>No image</span>
                         }
                     </td>
                 </tr>
@@ -39,7 +39,7 @@
 }
 else
 {
-    <p>Essa banda ainda não possui membros.</p>
+    <p>This Band Doesen't have a Member.</p>
 }
 
-<a asp-page="/BandPages/Index">Voltar para lista de Bandas</a>
+<a asp-page="/BandPages/Index">back</a>

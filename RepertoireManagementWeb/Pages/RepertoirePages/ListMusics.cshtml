@@ -1,0 +1,56 @@
+﻿@page
+@model RepertoireManagementWeb.Pages.RepertoirePages.MusicPage.ListMusicsModel
+@{
+    ViewData["Title"] = "Repertoire Musics";
+}
+
+<h1>Repertoire Musics: @Model.Repertoire.Name</h1>
+
+@if (Model.MusicLinks.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>PDF</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var link in Model.MusicLinks)
+            {
+                <tr>
+                    <td>@link.OrderInRepertoire</td>
+                    <td>@link.Music?.Title</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(link.Music?.ImageUrl))
+                        {
+                            <img src="@link.Music.ImageUrl" alt="Imagem" width="50" height="50" />
+                        }
+                        else
+                        {
+                            <span>No image</span>
+                        }
+                    </td>
+                    <td>
+                        @if (link.Music?.PdfFile != null)
+                        {
+                            <a href="@Url.Action("Download", "Pdf", new { id = link.Music.Id })">Download PDF</a>
+                        }
+                        else
+                        {
+                            <span>No PDF</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>This Repertoire Doesen't Have a Music</p>
+}
+
+<a asp-page="/RepertoirePages/Index">back</a>

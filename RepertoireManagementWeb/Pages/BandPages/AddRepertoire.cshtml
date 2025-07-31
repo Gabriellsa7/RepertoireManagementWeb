@@ -1,0 +1,32 @@
+﻿@page
+@model RepertoireManagementWeb.Pages.BandPages.RepertoirePage.AddRepertoireModel
+@{
+    ViewData["Title"] = "Adicionar Repertório";
+}
+
+<h2>Adicionar Repertório à Banda</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="BandId" />
+
+    <div class="form-group">
+        <label asp-for="NewRepertoire.Name"></label>
+        <input asp-for="NewRepertoire.Name" class="form-control" />
+        <span asp-validation-for="NewRepertoire.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NewRepertoire.Description"></label>
+        <textarea asp-for="NewRepertoire.Description" class="form-control"></textarea>
+        <span asp-validation-for="NewRepertoire.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NewRepertoire.ImageUrl"></label>
+        <input asp-for="NewRepertoire.ImageUrl" class="form-control" />
+        <span asp-validation-for="NewRepertoire.ImageUrl" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a asp-page="/BandPages/Details" asp-route-id="@Model.BandId" class="btn btn-secondary">Cancelar</a>
+</form>
