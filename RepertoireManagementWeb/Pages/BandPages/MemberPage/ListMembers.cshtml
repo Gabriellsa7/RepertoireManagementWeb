@@ -1,0 +1,45 @@
+﻿@page
+@model RepertoireManagementWeb.Pages.BandPages.MemberPage.ListMembersModel
+@{
+    ViewData["Title"] = "Membros da Banda";
+}
+
+<h1>Membros da Banda: @Model.Band.Name</h1>
+
+@if (Model.Members.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Imagem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Members)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(user.ImageUrl))
+                        {
+                            <img src="@user.ImageUrl" alt="Imagem" width="50" height="50" />
+                        }
+                        else
+                        {
+                            <span>Sem imagem</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Essa banda ainda não possui membros.</p>
+}
+
+<a asp-page="/BandPages/Index">Voltar para lista de Bandas</a>

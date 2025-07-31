@@ -32,6 +32,9 @@
     </dl>
 </div>
 <div>
+    <a asp-page="/BandPages/MemberPage/AddMember" asp-route-bandId="@Model.Band.Id">
+        Adicionar Membro
+    </a> | 
     <a asp-page="./Edit" asp-route-id="@Model.Band.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

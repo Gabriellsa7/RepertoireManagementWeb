@@ -1,0 +1,21 @@
+﻿@page
+@model RepertoireManagementWeb.Pages.Bands.Members.AddMemberModel
+@{
+    ViewData["Title"] = "Adicionar Membro à Banda";
+}
+
+<h2>Adicionar Membro à Banda: @Model.Band.Name</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="BandId" />
+
+    <div class="form-group">
+        <label asp-for="SelectedUserId">Selecionar Usuário</label>
+        <select asp-for="SelectedUserId" class="form-control" asp-items="Model.AvailableUsers">
+            <option value="">-- Selecione um usuário --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Adicionar Membro</button>
+    <a asp-page="/Bands/Details" asp-route-id="@Model.BandId" class="btn btn-secondary">Cancelar</a>
+</form>
