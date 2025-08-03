@@ -8,4 +8,20 @@
     <h1 class="display-4">Welcome To the Repertoire Management</h1>
     <p>lets the lead musician instantly sync repertoire structures and commands with the whole band for seamless, real‑time collaboration.</p>
     <a target="_blank" href="https://github.com/Gabriellsa7/RepertoireManagementWeb/tree/master/RepertoireManagementWeb">You can find the project repository on GitHub.</a>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <p class="mt-3">
+            Already Have an Account? <a asp-page="/Login">Login</a>
+        </p>
+        <p class="mt-3">
+            Don't Have an Account? <a asp-page="/UserPages/Create">Signup</a>
+        </p>
+    }
+    else
+    {
+        <p class="mt-3">
+            Welcome, @User.Identity.Name!
+            <a asp-page="/Logout">Logout</a>
+        </p>
+    }
 </div>

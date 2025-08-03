@@ -38,7 +38,7 @@ namespace RepertoireManagementWeb.Pages.UserPages
             _context.Users.Add(User);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Login");
+            return RedirectToPage("/Login");
         }
     }
 }

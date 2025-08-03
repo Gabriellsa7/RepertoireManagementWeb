@@ -1,51 +1,43 @@
 ﻿using RepertoireManagementWeb.Data;
-//using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext")));
 
+// Adiciona serviços essenciais para autenticação via cookie
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login";   // Página de login
+        options.LogoutPath = "/Logout"; // Página de logout
+        options.ExpireTimeSpan = TimeSpan.FromHours(1); // Tempo do cookie (opcional)
+    });
 
-// Add AppDbContext with MySQL
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//    options.UseMySql(
-//        builder.Configuration.GetConnectionString("DefaultConnection"),
-//        new MySqlServerVersion(new Version(8, 0, 36)) // Ajuste conforme sua vers�o do MySQL
-//    )
-//);
-
-// Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession();
+
+// IMPORTANTE: ordem correta - primeiro autenticação, depois autorização
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
-app.MapGet("/", context =>
-{
-    context.Response.Redirect("/Login");
-    return Task.CompletedTask;
-});
 
 app.Run();
