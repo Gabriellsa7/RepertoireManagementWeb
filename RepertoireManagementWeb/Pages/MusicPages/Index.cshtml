@@ -19,9 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Music[0].ImageUrl)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.Music[0].PdfFile)
-            </th>
+            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -34,9 +34,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ImageUrl)
             </td>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.PdfFile)
-            </td>
+            </td> *@
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |

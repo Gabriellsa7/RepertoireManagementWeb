@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <span class="text-danger">*</span>
@@ -25,14 +25,14 @@
                 <span asp-validation-for="Music.ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Music.PdfFile" class="control-label"></label>
-                <input asp-for="Music.PdfFile" class="form-control" />
-                <span asp-validation-for="Music.PdfFile" class="text-danger"></span>
+                <label for="PdfUpload">Upload da Letra (PDF)</label>
+                <input type="file" id="PdfUpload" name="PdfUpload" class="form-control" accept=".pdf" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+
     </div>
 </div>
 
