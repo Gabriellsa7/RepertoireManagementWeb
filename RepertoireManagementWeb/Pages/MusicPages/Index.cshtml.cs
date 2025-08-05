@@ -23,7 +23,27 @@ namespace RepertoireManagementWeb.Pages.MusicPages
 
         public async Task OnGetAsync()
         {
-            Music = await _context.Musics.ToListAsync();
+            var userIdStr = HttpContext.Session.GetString("UserId");
+
+            if (!Guid.TryParse(userIdStr, out Guid userId))
+            {
+                Music = new List<Music>();
+                return;
+            }
+
+            Music = await _context.Musics
+                .Where(m =>
+                    m.RepertoireLinks.Any(rm =>
+                        rm.Repertoire.Band != null &&
+                        (
+                            rm.Repertoire.Band.LeaderId == userId ||
+                            rm.Repertoire.Band.Members.Any(mb => mb.Id == userId)
+                        )
+                    )
+                )
+                .Distinct()
+                .ToListAsync();
         }
+
     }
 }

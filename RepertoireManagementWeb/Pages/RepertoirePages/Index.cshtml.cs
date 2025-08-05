@@ -23,8 +23,25 @@ namespace RepertoireManagementWeb.Pages.RepertoirePages
 
         public async Task OnGetAsync()
         {
+            var userIdStr = HttpContext.Session.GetString("UserId");
+
+            if (!Guid.TryParse(userIdStr, out Guid userId))
+            {
+                Repertoire = new List<Repertoire>();
+                return;
+            }
+
             Repertoire = await _context.Repertoires
-                .Include(r => r.Band).ToListAsync();
+                .Include(r => r.Band)
+                    .ThenInclude(b => b.Members)
+                .Where(r =>
+                    r.Band != null &&
+                    (
+                        r.Band.LeaderId == userId ||
+                        r.Band.Members.Any(m => m.Id == userId)
+                    )
+                )
+                .ToListAsync();
         }
     }
 }
