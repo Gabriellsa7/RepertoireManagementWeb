@@ -23,8 +23,22 @@ namespace RepertoireManagementWeb.Pages.BandPages
 
         public async Task OnGetAsync()
         {
+            var userIdStr = HttpContext.Session.GetString("UserId");
+
+            if (!Guid.TryParse(userIdStr, out Guid userId))
+            {
+                Band = new List<Band>();
+                return;
+            }
+
             Band = await _context.Bands
-                .Include(b => b.Leader).ToListAsync();
+                .Include(b => b.Leader)
+                .Include(b => b.Members)
+                .Where(b =>
+                    b.LeaderId == userId ||             
+                    b.Members.Any(m => m.Id == userId)
+                )
+                .ToListAsync();
         }
     }
 }

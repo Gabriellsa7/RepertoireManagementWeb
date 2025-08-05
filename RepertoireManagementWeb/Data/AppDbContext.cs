@@ -18,14 +18,19 @@ namespace RepertoireManagementWeb.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Relação Leader (User) -> Band (One-to-Many ou One-to-One)
+            // Relationship Leader (User) -> Band (One-to-Many or One-to-One)
             modelBuilder.Entity<Band>()
                 .HasOne(b => b.Leader)
-                .WithMany()          // Aqui você pode colocar a propriedade de navegação inversa, se existir; senão, deixa vazio
+                .WithMany() 
                 .HasForeignKey("LeaderId")
                 .OnDelete(DeleteBehavior.SetNull);
 
-            // Configuração de cascata nos relacionamentos
+            modelBuilder.Entity<Band>()
+            .HasMany(b => b.Members)
+            .WithMany(u => u.Bands);
+
+
+            // Cascate settings in relationship
             modelBuilder.Entity<RepertoireMusic>()
                 .HasOne(rm => rm.Repertoire)
                 .WithMany(r => r.MusicLinks)
@@ -38,7 +43,6 @@ namespace RepertoireManagementWeb.Data
                 .HasForeignKey(rm => rm.MusicId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Garante criação automática da coluna "created_at"
             //modelBuilder.Entity<Repertoire>()
             //    .Property(r => r.CreatedAt)
             //    .HasDefaultValueSql("CURRENT_TIMESTAMP");
