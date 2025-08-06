@@ -7,13 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext")));
 
-// Adiciona serviços essenciais para autenticação via cookie
+// Add a essentials services to authentication by cookie
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Login";   // Página de login
-        options.LogoutPath = "/Logout"; // Página de logout
-        options.ExpireTimeSpan = TimeSpan.FromHours(1); // Tempo do cookie (opcional)
+        options.LoginPath = "/Login";   // Login Page
+        options.LogoutPath = "/Logout"; // Logout Page
+        options.ExpireTimeSpan = TimeSpan.FromHours(1); // Cookie Time
     });
 
 builder.Services.AddRazorPages();
@@ -34,8 +34,7 @@ app.UseRouting();
 
 app.UseSession();
 
-// IMPORTANTE: ordem correta - primeiro autenticação, depois autorização
-app.UseAuthentication();
+// Important: correct order - first authentication, second authorization 
 app.UseAuthorization();
 
 app.MapRazorPages();

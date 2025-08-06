@@ -23,6 +23,10 @@ namespace RepertoireManagementWeb.Pages.MusicPages
         [BindProperty]
         public Music Music { get; set; } = default!;
 
+        [BindProperty]
+        public IFormFile? PdfUpload { get; set; }
+
+
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
@@ -48,7 +52,23 @@ namespace RepertoireManagementWeb.Pages.MusicPages
                 return Page();
             }
 
-            _context.Attach(Music).State = EntityState.Modified;
+            var musicInDb = await _context.Musics.FirstOrDefaultAsync(m => m.Id == Music.Id);
+            if (musicInDb == null)
+            {
+                return NotFound();
+            }
+
+            // Update variables
+            musicInDb.Title = Music.Title;
+            musicInDb.ImageUrl = Music.ImageUrl;
+
+            // If sending a new PDF, update.
+            if (PdfUpload != null && PdfUpload.Length > 0)
+            {
+                using var memoryStream = new MemoryStream();
+                await PdfUpload.CopyToAsync(memoryStream);
+                musicInDb.PdfFile = memoryStream.ToArray();
+            }
 
             try
             {
@@ -68,6 +88,7 @@ namespace RepertoireManagementWeb.Pages.MusicPages
 
             return RedirectToPage("./Index");
         }
+
 
         private bool MusicExists(Guid id)
         {

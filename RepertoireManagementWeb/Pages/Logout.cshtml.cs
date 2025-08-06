@@ -10,13 +10,13 @@ namespace RepertoireManagementWeb.Pages
     {
         public async Task<IActionResult> OnGetAsync()
         {
-            // Remove o cookie de autenticação
+            //Remove The cookie authentication
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            // Limpa sessão se você usa
+            // Clear session.
             HttpContext.Session.Clear();
 
-            // Redireciona para a página de login (ou onde quiser)
+            // Redirect to login page
             return RedirectToPage("/Login");
         }
     }

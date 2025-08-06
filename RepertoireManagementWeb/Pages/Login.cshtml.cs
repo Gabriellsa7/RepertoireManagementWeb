@@ -36,23 +36,21 @@ public class LoginModel : PageModel
 
         if (user != null)
         {
-            // Cria as claims com informações do usuário
+            //Create the claims with user information.
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email)
-                // Adicione outras claims se quiser
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-            // Realiza o login (cookie authentication)
+            // Login (cookie authentication)
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
-            // Opcional: também pode guardar na sessão se quiser, mas não é obrigatório
             HttpContext.Session.SetString("UserId", user.Id.ToString());
             HttpContext.Session.SetString("UserName", user.Name);
 

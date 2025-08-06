@@ -25,7 +25,7 @@ namespace RepertoireManagementWeb.Pages.MusicPages
                 return NotFound();
             }
 
-            // Não retorna para uma view Razor: apenas envia o arquivo
+            // Not return to a view Razor: only send the file
             return File(music.PdfFile, "application/pdf");
         }
     }
