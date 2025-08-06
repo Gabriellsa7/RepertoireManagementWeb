@@ -1,5 +1,6 @@
 ﻿body {
     background-color: var(--background-color);
+    color: var(--primary-text-color);
 }
 
 :root {
@@ -8,5 +9,6 @@
     --primary-button: #009da2;
     --hover-text-color: #00d4db;
     --secondary-text-color: #009da2;
-    --primary-text-color: #FFFFFF;
+    --primary-text-color: #ffffff;
 }
+

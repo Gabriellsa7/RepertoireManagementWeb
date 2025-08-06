@@ -1,0 +1,21 @@
+﻿body {
+}
+
+.btn-primary {
+    background-color: #009da2;
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #00d4db;
+}
+
+.secondary-text-color {
+    color: #009da2;
+    font: bold
+}
+
+.secondary-text-color:hover {
+    color: #00d4db;
+}
