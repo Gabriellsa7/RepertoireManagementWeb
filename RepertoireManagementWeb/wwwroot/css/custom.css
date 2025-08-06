@@ -1,0 +1,12 @@
+﻿body {
+    background-color: var(--background-color);
+}
+
+:root {
+    --background-color: #0b0e15;
+    --foreground: #171717;
+    --primary-button: #009da2;
+    --hover-text-color: #00d4db;
+    --secondary-text-color: #009da2;
+    --primary-text-color: #FFFFFF;
+}
