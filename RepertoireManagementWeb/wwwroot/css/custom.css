@@ -3,6 +3,40 @@
     color: var(--primary-text-color);
 }
 
+.btn-main {
+    background-color: var(--primary-button);
+}
+
+.custom-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .custom-upload input[type="file"] {
+        display: none;
+    }
+
+.custom-upload-label {
+    padding: 8px 20px;
+    background-color: #00bcd4;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.file-name {
+    color: #ffffff;
+    font-style: italic;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
 :root {
     --background-color: #0b0e15;
     --foreground: #171717;

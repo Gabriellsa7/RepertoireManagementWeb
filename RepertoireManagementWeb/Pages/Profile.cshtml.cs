@@ -22,6 +22,34 @@ namespace RepertoireManagementWeb.Pages
         public string UserName { get; set; }
         public string ImageUrl { get; set; }
 
+        [BindProperty]
+        public IFormFile ProfileImage { get; set; }
+        public async Task<IActionResult> OnPostUploadImageAsync()
+        {
+            var username = User.Identity.Name;
+            var user = _context.Users.FirstOrDefault(u => u.Name == username);
+
+            if (user == null || ProfileImage == null)
+                return Page();
+
+            var uploadsFolder = Path.Combine("wwwroot", "uploads");
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
+            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(ProfileImage.FileName);
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await ProfileImage.CopyToAsync(fileStream);
+            }
+
+            user.ImageUrl = "/uploads/" + uniqueFileName;
+            _context.SaveChanges();
+
+            return RedirectToPage(); 
+        }
+
         public async Task<IActionResult> OnGetAsync()
         {
             var username = User.Identity.Name;
