@@ -1,0 +1,30 @@
+﻿@page
+@model RepertoireManagementWeb.Pages.ProfileModel
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="container text-center mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a asp-page="/Index" class="btn btn-outline-primary">Back</a>
+        <form method="post" asp-page-handler="Logout">
+            <button type="submit" class="btn btn-outline-danger">Logout</button>
+        </form>
+    </div>
+
+    <div class="d-flex flex-column align-items-center">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" class="rounded-circle mb-3" width="120" height="120" alt="Foto do usuário" />
+        }
+        else if (!string.IsNullOrEmpty(Model.UserName))
+        {
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mb-3"
+                 style="width: 120px; height: 120px; font-size: 48px;">
+                @Model.UserName.Substring(0, 1).ToUpper()
+            </div>
+        }
+
+        <h2>@Model.UserName</h2>
+    </div>
+</div>
