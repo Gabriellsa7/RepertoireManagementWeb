@@ -5,49 +5,48 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<link rel="stylesheet" href="~/css/login.css" />
 
-<h4>User</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="d-flex flex-column">
+    <div class="d-flex justify-content-center my-5">
+        <img class="img-fluid" src="~/img/logo.png" alt="Logo da empresa" />
+    </div>
+    <div>
+        <h1>Welcome!</h1>
         <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="User.ImageUrl" class="control-label"></label>
-                <input asp-for="User.ImageUrl" class="form-control" />
-                <span asp-validation-for="User.ImageUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="User.Name" class="control-label"></label>
-                <input asp-for="User.Name" class="form-control" />
-                <span asp-validation-for="User.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="User.Email" class="control-label"></label>
-                <input asp-for="User.Email" class="form-control" />
-                <span asp-validation-for="User.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="User.Password" class="control-label"></label>
-                <input asp-for="User.Password" class="form-control" />
-                <span asp-validation-for="User.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">    
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="d-flex flex-column gap-lg-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <span class="text-danger">*</span>
+                    <label asp-for="User.Name" class="control-label"></label>
+                    <input asp-for="User.Name" class="form-control" />
+                    <span asp-validation-for="User.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <span class="text-danger">*</span>
+                    <label asp-for="User.Email" class="control-label"></label>
+                    <input asp-for="User.Email" class="form-control" />
+                    <span asp-validation-for="User.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <span class="text-danger">*</span>
+                    <label asp-for="User.Password" class="control-label"></label>
+                    <input asp-for="User.Password" type="password" class="form-control" />
+                    <span asp-validation-for="User.Password" class="text-danger"></span>
+                </div>
+                @* <div class="form-group">
+                    <label asp-for="User.ImageUrl" class="control-label">Profile Image Link</label>
+                    <input asp-for="User.ImageUrl" class="form-control" />
+                    <span asp-validation-for="User.ImageUrl" class="text-danger"></span>
+                </div> *@
+                <button type="submit" class="btn btn-primary mt-2">Register</button>
             </div>
         </form>
+        <p class="mt-3">
+            Already have an account?
+            <a class ="secondary-text-color" asp-page="/Login">Log in</a>
+        </p>
     </div>
-</div>
-
-<div>
-    <p>
-        Already have an account?
-        <a asp-page="/Login">Log in</a>
-    </p>
 </div>
 
 @section Scripts {
