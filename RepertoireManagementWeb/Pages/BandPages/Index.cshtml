@@ -7,6 +7,11 @@
 
 <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 
+@{
+    var userIdStr = HttpContext.Session.GetString("UserId");
+    Guid.TryParse(userIdStr, out var loggedUserId);
+}
+
 <h1>Band</h1>
 
 <table class="table">
@@ -14,12 +19,12 @@
         <tr class="primary-text-color">
             <th>
                 <p class="primary-text-color">
-                @Html.DisplayNameFor(model => model.Band[0].Name)
+                    @Html.DisplayNameFor(model => model.Band[0].Name)
                 </p>
             </th>
             <th>
                 <p class="primary-text-color">
-                @Html.DisplayNameFor(model => model.Band[0].Leader)
+                    @Html.DisplayNameFor(model => model.Band[0].Leader)
                 </p>
             </th>
             <th></th>
@@ -40,16 +45,23 @@
                     </p>
                 </td>
                 <td class="primary-text-color">
-                    <a class="text-details" asp-page="Create">Create New</a> |
-                    <a class="text-details" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a class="text-details" asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
-                    <a class="text-details" asp-page="./MemberPage/ListMembers" asp-route-bandId="@item.Id">See Members</a> |
+                    <div class="d-flex gap-2">
+                        @if (item.LeaderId == loggedUserId)
+                        {
+                            <div>
+                                <a class="text-details" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a class="text-details" asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
+                            </div>
+                        }
+                        <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a class="text-details" asp-page="./MemberPage/ListMembers" asp-route-bandId="@item.Id">See Members</a> |
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-
+<a class="btn btn-main" asp-page="Create">Create New</a>
+<hr />
 <a asp-page="/Index" class="btn btn-main">Back</a>
