@@ -30,15 +30,16 @@
                 <select asp-for="Band.LeaderId" class="form-control" asp-items="ViewBag.LeaderId"></select>
                 <span asp-validation-for="Band.LeaderId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group pt-2">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
+<hr />
+<div class="mt-2">
+    <a asp-page="Index" class="btn btn-main">Back</a>
 </div>
 
 @section Scripts {

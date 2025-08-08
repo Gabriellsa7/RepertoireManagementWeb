@@ -4,13 +4,15 @@
     ViewData["Title"] = "Bands Members";
 }
 
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+
 <h1>Bands Members: @Model.Band.Name</h1>
 
 @if (Model.Members.Any())
 {
     <table class="table">
         <thead>
-            <tr>
+            <tr class="primary-text-color">
                 <th>Name</th>
                 <th>Email</th>
                 <th>Image</th>
@@ -19,7 +21,7 @@
         <tbody>
             @foreach (var user in Model.Members)
             {
-                <tr>
+                <tr class="primary-text-color">
                     <td>@user.Name</td>
                     <td>@user.Email</td>
                     <td>
@@ -41,5 +43,4 @@ else
 {
     <p>This Band Doesen't have a Member.</p>
 }
-
-<a asp-page="/BandPages/Index">back</a>
+<a asp-page="../Index" class="btn btn-main">Back</a>

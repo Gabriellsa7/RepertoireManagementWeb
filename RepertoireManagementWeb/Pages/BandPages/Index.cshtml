@@ -5,45 +5,51 @@
     ViewData["Title"] = "Index";
 }
 
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+
 <h1>Band</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="primary-text-color">
             <th>
+                <p class="primary-text-color">
                 @Html.DisplayNameFor(model => model.Band[0].Name)
+                </p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Band[0].ImageUrl)
-            </th>
-            <th>
+                <p class="primary-text-color">
                 @Html.DisplayNameFor(model => model.Band[0].Leader)
+                </p>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Band) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Leader.Email)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
-                <a asp-page="./MemberPage/ListMembers" asp-route-bandId="@item.Id">See Members</a> |
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Band)
+        {
+            <tr>
+                <td>
+                    <p class="primary-text-color">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </p>
+                </td>
+                <td>
+                    <p class="primary-text-color">
+                        @Html.DisplayFor(modelItem => item.Leader.Email)
+                    </p>
+                </td>
+                <td class="primary-text-color">
+                    <a class="text-details" asp-page="Create">Create New</a> |
+                    <a class="text-details" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="text-details" asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
+                    <a class="text-details" asp-page="./MemberPage/ListMembers" asp-route-bandId="@item.Id">See Members</a> |
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+<a asp-page="/Index" class="btn btn-main">Back</a>

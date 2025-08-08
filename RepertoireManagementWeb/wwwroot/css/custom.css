@@ -3,9 +3,27 @@
     color: var(--primary-text-color);
 }
 
+.primary-text-color {
+    color: var(--primary-text-color);
+}
+
+.text-details {
+    color: var(--primary-text-color);
+}
+
+    .text-details:hover {
+        color: var(--secondary-text-color);
+    }
+
 .btn-main {
     background-color: var(--primary-button);
+    color: var(--primary-text-color)
 }
+
+    .btn-main:hover {
+        background-color: #00d4db;
+        color: var(--primary-text-color)
+    }
 
 .custom-upload {
     display: flex;
@@ -90,4 +108,3 @@
     font-size: 1.25rem;
     font-weight: bold;
 }
-
