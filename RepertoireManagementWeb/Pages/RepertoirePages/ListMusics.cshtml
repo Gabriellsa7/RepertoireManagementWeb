@@ -4,23 +4,23 @@
     ViewData["Title"] = "Repertoire Musics";
 }
 
-<h1>Repertoire Musics: @Model.Repertoire.Name</h1>
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 
+<h1>Repertoire Musics: @Model.Repertoire.Name</h1>
 @if (Model.MusicLinks.Any())
 {
     <table class="table">
         <thead>
-            <tr>
+            <tr class="primary-text-color">
                 <th>Order</th>
                 <th>Title</th>
                 <th>Image</th>
-                <th>PDF</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var link in Model.MusicLinks)
             {
-                <tr>
+                <tr class="primary-text-color">
                     <td>@link.OrderInRepertoire</td>
                     <td>@link.Music?.Title</td>
                     <td>
@@ -33,16 +33,6 @@
                             <span>No image</span>
                         }
                     </td>
-                    <td>
-                        @if (link.Music?.PdfFile != null)
-                        {
-                            <a href="@Url.Action("Download", "Pdf", new { id = link.Music.Id })">Download PDF</a>
-                        }
-                        else
-                        {
-                            <span>No PDF</span>
-                        }
-                    </td>
                 </tr>
             }
         </tbody>
@@ -50,7 +40,9 @@
 }
 else
 {
-    <p>This Repertoire Doesen't Have a Music</p>
+    <p class="primary-text-color">This Repertoire Doesen't Have a Music</p>
 }
 
-<a asp-page="/RepertoirePages/Index">back</a>
+<div>
+    <a asp-page="Index" class="btn btn-main">Back</a>
+</div>

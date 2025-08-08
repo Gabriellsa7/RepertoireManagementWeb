@@ -4,6 +4,8 @@
     ViewData["Title"] = "Add Music to Repertoire";
 }
 
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+
 <h1>Add Music to Repertoire: @Model.RepertoireName</h1>
 
 <form method="post">
@@ -14,6 +16,6 @@
         <select asp-for="MusicId" asp-items="Model.MusicOptions" class="form-control"></select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Add</button>
-    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-main mt-2">Add</button>
+    <a asp-page="Index" class="btn btn-main mt-2">Cancel</a>
 </form>

@@ -5,8 +5,11 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 
+
+<h1>Create</h1>
+<hr />
 <h4>Repertoire</h4>
 <hr />
 <div class="row">
@@ -31,18 +34,18 @@
                 <span asp-validation-for="Repertoire.ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Repertoire.BandId" class="control-label"></label>
+                <label asp-for="Repertoire.BandId" class="control-label">Band</label>
                 <select asp-for="Repertoire.BandId" class ="form-control" asp-items="ViewBag.BandId"></select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group mt-2">
+                <input type="submit" value="Create" class="btn btn-main" />
             </div>
         </form>
     </div>
 </div>
-
+<hr />
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index" class="btn btn-main">Back</a>
 </div>
 
 @section Scripts {

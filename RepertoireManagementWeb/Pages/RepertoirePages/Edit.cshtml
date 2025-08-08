@@ -6,7 +6,7 @@
 }
 
 <h1>Edit</h1>
-
+<hr />
 <h4>Repertoire</h4>
 <hr />
 <div class="row">
@@ -36,15 +36,15 @@
                 <select asp-for="Repertoire.BandId" class="form-control" asp-items="ViewBag.BandId"></select>
                 <span asp-validation-for="Repertoire.BandId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group mt-2">
+                <input type="submit" value="Save" class="btn btn-main" />
             </div>
         </form>
     </div>
 </div>
-
+<hr/>
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="Index" class="btn btn-main">Back</a>
 </div>
 
 @section Scripts {

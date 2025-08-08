@@ -5,22 +5,18 @@
     ViewData["Title"] = "Index";
 }
 
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+
 <h1>Repertoire</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="primary-text-color">
             <th>
                 @Html.DisplayNameFor(model => model.Repertoire[0].Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Repertoire[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Repertoire[0].ImageUrl)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Repertoire[0].Band)
@@ -29,28 +25,28 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Repertoire) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Band.Name)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a> | 
-                <a asp-page="./ListMusics" asp-route-repertoireId="@item.Id">See Musics</a> |
-                <a asp-page="./AddMusic" asp-route-repertoireId="@item.Id">Add Music</a> |
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Repertoire)
+        {
+            <tr class="primary-text-color">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Band.Name)
+                </td>
+                <td>
+                    <a class="text-details" asp-page="Create">Create New</a> |
+                    <a class="text-details" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="text-details" asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
+                    <a class="text-details" asp-page="./ListMusics" asp-route-repertoireId="@item.Id">See Musics</a> |
+                    <a class="text-details" asp-page="./AddMusic" asp-route-repertoireId="@item.Id">Add Music</a> |
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<a asp-page="/Index" class="btn btn-main">Back</a>
