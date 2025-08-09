@@ -21,6 +21,8 @@ namespace RepertoireManagementWeb.Pages.RepertoirePages
 
         public IList<Repertoire> Repertoire { get;set; } = default!;
 
+        public bool IsLeader { get; set; } = false;
+
         public async Task OnGetAsync()
         {
             var userIdStr = HttpContext.Session.GetString("UserId");
@@ -28,6 +30,7 @@ namespace RepertoireManagementWeb.Pages.RepertoirePages
             if (!Guid.TryParse(userIdStr, out Guid userId))
             {
                 Repertoire = new List<Repertoire>();
+                IsLeader = false;
                 return;
             }
 
@@ -37,11 +40,13 @@ namespace RepertoireManagementWeb.Pages.RepertoirePages
                 .Where(r =>
                     r.Band != null &&
                     (
-                        r.Band.LeaderId == userId ||
-                        r.Band.Members.Any(m => m.Id == userId)
+                        r.Band.LeaderId == userId ||              
+                        r.Band.Members.Any(m => m.Id == userId)    
                     )
                 )
                 .ToListAsync();
+
+            IsLeader = await _context.Bands.AnyAsync(b => b.LeaderId == userId);
         }
     }
 }

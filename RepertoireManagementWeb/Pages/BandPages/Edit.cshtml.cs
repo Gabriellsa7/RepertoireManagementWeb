@@ -30,13 +30,16 @@ namespace RepertoireManagementWeb.Pages.BandPages
                 return NotFound();
             }
 
-            var band =  await _context.Bands.FirstOrDefaultAsync(m => m.Id == id);
+            var band = await _context.Bands
+    .Include(b => b.Leader)
+    .FirstOrDefaultAsync(m => m.Id == id);
+
             if (band == null)
             {
                 return NotFound();
             }
             Band = band;
-           ViewData["LeaderId"] = new SelectList(_context.Users, "Id", "Email");
+            ViewData["LeaderId"] = new SelectList(_context.Users, "Id", "Email");
             return Page();
         }
 
@@ -49,7 +52,14 @@ namespace RepertoireManagementWeb.Pages.BandPages
                 return Page();
             }
 
-            _context.Attach(Band).State = EntityState.Modified;
+            var bandToUpdate = await _context.Bands.FindAsync(Band.Id);
+            if (bandToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            bandToUpdate.Name = Band.Name;
+            bandToUpdate.ImageUrl = Band.ImageUrl;
 
             try
             {
@@ -69,6 +79,7 @@ namespace RepertoireManagementWeb.Pages.BandPages
 
             return RedirectToPage("./Index");
         }
+
 
         private bool BandExists(Guid id)
         {

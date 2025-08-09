@@ -21,6 +21,8 @@ namespace RepertoireManagementWeb.Pages.MusicPages
 
         public IList<Music> Music { get; set; } = default!;
 
+        public bool IsLeader { get; set; } = false;
+
         public async Task OnGetAsync()
         {
             var userIdStr = HttpContext.Session.GetString("UserId");
@@ -28,6 +30,7 @@ namespace RepertoireManagementWeb.Pages.MusicPages
             if (!Guid.TryParse(userIdStr, out Guid userId))
             {
                 Music = new List<Music>();
+                IsLeader = false;
                 return;
             }
 
@@ -46,7 +49,11 @@ namespace RepertoireManagementWeb.Pages.MusicPages
                 )
                 .Distinct()
                 .ToListAsync();
+
+            // Verifica se o usuário é líder de alguma banda
+            IsLeader = await _context.Bands.AnyAsync(b => b.LeaderId == userId);
         }
+
 
     }
 }

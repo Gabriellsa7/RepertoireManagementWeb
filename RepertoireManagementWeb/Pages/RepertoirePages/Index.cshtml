@@ -60,6 +60,11 @@
         }
     </tbody>
 </table>
-<a class="btn btn-main" asp-page="Create">Create New</a>
-<hr />
+@if (Model.IsLeader)
+{
+    <div>
+    <a class="btn btn-main" asp-page="Create">Create New</a>
+    <hr />
+    </div>
+}
 <a asp-page="/Index" class="btn btn-main">Back</a>

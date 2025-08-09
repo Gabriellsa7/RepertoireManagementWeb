@@ -32,9 +32,8 @@
                 <span asp-validation-for="Repertoire.ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Repertoire.BandId" class="control-label"></label>
-                <select asp-for="Repertoire.BandId" class="form-control" asp-items="ViewBag.BandId"></select>
-                <span asp-validation-for="Repertoire.BandId" class="text-danger"></span>
+                <label class="control-label">Band</label>
+                <input class="form-control" value="@Model.Repertoire.Band?.Name" disabled />
             </div>
             <div class="form-group mt-2">
                 <input type="submit" value="Save" class="btn btn-main" />

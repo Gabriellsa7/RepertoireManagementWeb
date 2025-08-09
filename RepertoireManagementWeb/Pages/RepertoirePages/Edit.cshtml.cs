@@ -30,15 +30,20 @@ namespace RepertoireManagementWeb.Pages.RepertoirePages
                 return NotFound();
             }
 
-            var repertoire =  await _context.Repertoires.FirstOrDefaultAsync(m => m.Id == id);
+            var repertoire = await _context.Repertoires
+                .Include(r => r.Band)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (repertoire == null)
             {
                 return NotFound();
             }
+
             Repertoire = repertoire;
-           ViewData["BandId"] = new SelectList(_context.Bands, "Id", "Name");
+
             return Page();
         }
+
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more information, see https://aka.ms/RazorPagesCRUD.
@@ -49,7 +54,16 @@ namespace RepertoireManagementWeb.Pages.RepertoirePages
                 return Page();
             }
 
-            _context.Attach(Repertoire).State = EntityState.Modified;
+            var repertoireToUpdate = await _context.Repertoires.FindAsync(Repertoire.Id);
+            if (repertoireToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            repertoireToUpdate.Name = Repertoire.Name;
+            repertoireToUpdate.Description = Repertoire.Description;
+            repertoireToUpdate.ImageUrl = Repertoire.ImageUrl;
+
 
             try
             {
@@ -69,6 +83,7 @@ namespace RepertoireManagementWeb.Pages.RepertoirePages
 
             return RedirectToPage("./Index");
         }
+
 
         private bool RepertoireExists(Guid id)
         {

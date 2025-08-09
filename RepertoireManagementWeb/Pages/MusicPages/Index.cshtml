@@ -42,22 +42,28 @@
                 @* <td>
                 @Html.DisplayFor(modelItem => item.PdfFile)
             </td> *@
-                <td >
+                <td>
                     <div class="d-flex gap-2">
-                    @if (item.RepertoireLinks.FirstOrDefault()?.Repertoire?.Band?.LeaderId == loggedUserId)
-                    {    
-                    <div>
-                    <a class="text-details" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="text-details" asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
-                    </div>
-                    }
-                    <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                        @if (item.RepertoireLinks.FirstOrDefault()?.Repertoire?.Band?.LeaderId == loggedUserId)
+                        {
+                            <div>
+                                <a class="text-details" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a class="text-details" asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
+                            </div>
+                        }
+                        <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a>
                     </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<a class="btn btn-main" asp-page="Create">Create New</a>
-<hr/>
+@if (Model.IsLeader)
+{
+    <div>
+        <a class="btn btn-main" asp-page="Create">Create New</a>
+        <hr /> 
+    </div>
+}
+
 <a asp-page="/Index" class="btn btn-main">Back</a>
