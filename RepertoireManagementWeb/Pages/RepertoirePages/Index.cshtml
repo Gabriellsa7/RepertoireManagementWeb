@@ -7,6 +7,11 @@
 
 <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 
+@{
+    var userIdStr = HttpContext.Session.GetString("UserId");
+    Guid.TryParse(userIdStr, out var loggedUserId);
+}
+
 <h1>Repertoire</h1>
 
 <table class="table">
@@ -38,15 +43,23 @@
                     @Html.DisplayFor(modelItem => item.Band.Name)
                 </td>
                 <td>
-                    <a class="text-details" asp-page="Create">Create New</a> |
-                    <a class="text-details" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a class="text-details" asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
-                    <a class="text-details" asp-page="./ListMusics" asp-route-repertoireId="@item.Id">See Musics</a> |
-                    <a class="text-details" asp-page="./AddMusic" asp-route-repertoireId="@item.Id">Add Music</a> |
+                    <div class="d-flex gap-2">
+                        @if (item.Band?.LeaderId == loggedUserId)
+                        {
+                            <div class="d-flex gap-2">
+                                <a class="text-details" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a class="text-details" asp - page="./Delete" asp-route-id="@item.Id"> Delete </a> |
+                                <a class="text-details" asp-page="./AddMusic" asp-route-repertoireId="@item.Id">Add Music</a> |
+                            </div>
+                        }
+                        <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a class="text-details" asp-page="./ListMusics" asp-route-repertoireId="@item.Id">See Musics</a>
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<a class="btn btn-main" asp-page="Create">Create New</a>
+<hr />
 <a asp-page="/Index" class="btn btn-main">Back</a>

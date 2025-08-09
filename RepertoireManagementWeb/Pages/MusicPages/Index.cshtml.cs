@@ -19,7 +19,7 @@ namespace RepertoireManagementWeb.Pages.MusicPages
             _context = context;
         }
 
-        public IList<Music> Music { get;set; } = default!;
+        public IList<Music> Music { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
@@ -32,6 +32,9 @@ namespace RepertoireManagementWeb.Pages.MusicPages
             }
 
             Music = await _context.Musics
+                .Include(m => m.RepertoireLinks)
+                .ThenInclude(rl => rl.Repertoire)
+                .ThenInclude(r => r.Band)
                 .Where(m =>
                     m.RepertoireLinks.Any(rm =>
                         rm.Repertoire.Band != null &&

@@ -3,6 +3,9 @@
 
 @{
     ViewData["Title"] = "Details";
+    var userIdStr = HttpContext.Session.GetString("UserId");
+    Guid.TryParse(userIdStr, out var loggedUserId);
+    var leaderId = Model.Repertoire.Band?.LeaderId;
 }
 
 <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
@@ -31,7 +34,10 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-main" asp-page="./Edit" asp-route-id="@Model.Repertoire.Id">Edit</a>
+    @if (leaderId == loggedUserId)
+    {
+        <a class="btn btn-main" asp-page="./Edit" asp-route-id="@Model.Repertoire.Id">Edit</a>
+    }
 </div>
 <hr />
 <div>

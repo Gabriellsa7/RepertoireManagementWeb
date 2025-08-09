@@ -28,15 +28,16 @@ namespace RepertoireManagementWeb.Pages.RepertoirePages
                 return NotFound();
             }
 
-            var repertoire = await _context.Repertoires.FirstOrDefaultAsync(m => m.Id == id);
+            var repertoire = await _context.Repertoires
+                .Include(r => r.Band) 
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (repertoire == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Repertoire = repertoire;
-            }
+
+            Repertoire = repertoire;
             return Page();
         }
     }

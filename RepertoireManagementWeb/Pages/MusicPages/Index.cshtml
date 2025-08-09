@@ -7,6 +7,11 @@
 
 <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 
+@{
+    var userIdStr = HttpContext.Session.GetString("UserId");
+    Guid.TryParse(userIdStr, out var loggedUserId);
+}
+
 <h1>Music</h1>
 
 <table class="table">
@@ -15,9 +20,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Music[0].Title)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.Music[0].ImageUrl)
-            </th>
+            </th> *@
             @* <th>
                 @Html.DisplayNameFor(model => model.Music[0].PdfFile)
             </th> *@
@@ -31,20 +36,28 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                <td>
+                @* <td>
                     @Html.DisplayFor(modelItem => item.ImageUrl)
-                </td>
+                </td> *@
                 @* <td>
                 @Html.DisplayFor(modelItem => item.PdfFile)
             </td> *@
-                <td>
-                    <a class="text-details" asp-page="Create">Create New</a> |
+                <td >
+                    <div class="d-flex gap-2">
+                    @if (item.RepertoireLinks.FirstOrDefault()?.Repertoire?.Band?.LeaderId == loggedUserId)
+                    {    
+                    <div>
                     <a class="text-details" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a class="text-details" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="text-details" asp-page="./Delete" asp-route-id="@item.Id">Delete</a> |
+                    </div>
+                    }
+                    <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<a class="btn btn-main" asp-page="Create">Create New</a>
+<hr/>
 <a asp-page="/Index" class="btn btn-main">Back</a>

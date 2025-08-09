@@ -28,16 +28,20 @@ namespace RepertoireManagementWeb.Pages.MusicPages
                 return NotFound();
             }
 
-            var music = await _context.Musics.FirstOrDefaultAsync(m => m.Id == id);
+            var music = await _context.Musics
+                .Include(m => m.RepertoireLinks)
+                    .ThenInclude(rl => rl.Repertoire)
+                        .ThenInclude(r => r.Band)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (music == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Music = music;
-            }
+
+            Music = music;
             return Page();
         }
+
     }
 }

@@ -7,24 +7,34 @@
 
 <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 
+@{
+    var userIdStr = HttpContext.Session.GetString("UserId");
+    Guid.TryParse(userIdStr, out var loggedUserId);
+    var leaderId = Model.Music.RepertoireLinks.FirstOrDefault()?.Repertoire?.Band?.LeaderId;
+}
+
+
 <h1>Details</h1>
 
 <div>
     <h4>Music</h4>
     <hr />
-    <dl class="row">
+    <dl class="col">
+        @if (!string.IsNullOrEmpty(Model.Music.ImageUrl))
+        {
+            <img src="@Model.Music.ImageUrl" alt="Music Image" style="max-width:300px; max-height:300px;" />
+        }
+        else
+        {
+            <span>No image available</span>
+        }
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Music.Title)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Music.Title)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Music.ImageUrl)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Music.ImageUrl)
-        </dd>
+        
         <dt class="col-sm-2">
             Letra (PDF)
         </dt>
@@ -39,14 +49,18 @@
             }
             else
             {
-                <span>Nenhum PDF disponível</span>
+                <span>No PDF</span>
             }
         </dd>
 
     </dl>
 </div>
 <div>
-    <a class="btn btn-main" asp-page="./Edit" asp-route-id="@Model.Music.Id">Edit</a>
+    @if (leaderId == loggedUserId)
+    {
+        <a class="btn btn-main" asp-page="./Edit" asp-route-id="@Model.Music.Id">Edit</a>
+    }
+
 </div>
 <hr class="primary-text-color"/>
 <a asp-page="Index" class="btn btn-main">Back</a>
