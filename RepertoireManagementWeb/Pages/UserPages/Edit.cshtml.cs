@@ -13,15 +13,18 @@ namespace RepertoireManagementWeb.Pages.UserPages
 {
     public class EditModel : PageModel
     {
-        private readonly RepertoireManagementWeb.Data.AppDbContext _context;
+        private readonly AppDbContext _context;
 
-        public EditModel(RepertoireManagementWeb.Data.AppDbContext context)
+        public EditModel(AppDbContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public User User { get; set; } = default!;
+        public new User User { get; set; }
+
+        [BindProperty]
+        public IFormFile ProfileImage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -30,43 +33,50 @@ namespace RepertoireManagementWeb.Pages.UserPages
                 return NotFound();
             }
 
-            var user =  await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            User = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+            if (User == null)
             {
                 return NotFound();
             }
-            User = user;
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
-            _context.Attach(User).State = EntityState.Modified;
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == User.Id);
 
-            try
+            if (existingUser == null)
+                return NotFound();
+
+            existingUser.Name = User.Name;
+            existingUser.Email = User.Email;
+            existingUser.Password = User.Password;
+
+            if (ProfileImage != null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(User.Id))
+                var uploadsFolder = Path.Combine("wwwroot", "uploads");
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(uploadsFolder);
+
+                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(ProfileImage.FileName);
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    return NotFound();
+                    await ProfileImage.CopyToAsync(fileStream);
                 }
-                else
-                {
-                    throw;
-                }
+
+                existingUser.ImageUrl = "/uploads/" + uniqueFileName;
             }
 
-            return RedirectToPage("./Index");
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("/Profile");
         }
 
         private bool UserExists(Guid id)

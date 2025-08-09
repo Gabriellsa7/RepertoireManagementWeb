@@ -50,22 +50,21 @@ namespace RepertoireManagementWeb.Pages
             return RedirectToPage(); 
         }
 
+        public Guid UserId { get; set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
             var username = User.Identity.Name;
 
             if (string.IsNullOrEmpty(username))
-            {
                 return RedirectToPage("/Login");
-            }
 
             var user = _context.Users.FirstOrDefault(u => u.Name == username);
 
             if (user == null)
-            {
                 return RedirectToPage("/Login");
-            }
 
+            UserId = user.Id;
             UserName = user.Name;
             ImageUrl = user.ImageUrl;
 

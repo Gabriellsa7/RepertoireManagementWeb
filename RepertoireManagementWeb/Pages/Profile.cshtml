@@ -28,8 +28,13 @@
         }
 
         <h2>@Model.UserName</h2>
+        <div class="mt-3">
+            <a asp-page="/UserPages/Edit" asp-route-id="@Model.UserId" class="btn btn-main">
+                Edit Profile
+            </a>
+        </div>
     </div>
-    <div>
+    @* <div>
         <form method="post" enctype="multipart/form-data" asp-page-handler="UploadImage">
             <div class="form-group custom-upload justify-content-center">
                 <label class="custom-upload-label" for="profileImage">Choose Archive</label>
@@ -40,12 +45,12 @@
                 <button type="submit" class="btn-main btn-success py-2 px-lg-5" style="border-radius: 60px; border: none;">Upload</button>
             </div>
         </form>
-    </div>
+    </div> *@
 </div>
 
-<script>
+@* <script>
     function updateFileName(input) {
         const fileName = input.files.length > 0 ? input.files[0].name : "No Archive";
         document.getElementById("fileName").textContent = fileName;
     }
-</script>
+</script> *@
