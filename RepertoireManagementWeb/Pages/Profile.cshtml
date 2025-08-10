@@ -50,6 +50,9 @@
         <a asp-page="/SettingsPages/Index" class="list-group-item list-group-item-action">
             ⚙️ Settings
         </a>
+        <a asp-page="/UserPages/Delete" asp-route-id="@Model.UserId" class="list-group-item list-group-item-action">
+            ⚠️ Dellete Account
+        </a>
     </div>
     @* <div>
         <form method="post" enctype="multipart/form-data" asp-page-handler="UploadImage">
