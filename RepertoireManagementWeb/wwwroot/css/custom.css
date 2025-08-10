@@ -130,3 +130,13 @@
             background-color: var(--background-color); /* Slightly lighter hover */
             color: #00d1b2; /* Accent color */
         }
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #111; /* ou cor do seu tema */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); /* sombra semelhante ao header da esquerda */
+    border-radius: 8px; /* opcional */
+}
