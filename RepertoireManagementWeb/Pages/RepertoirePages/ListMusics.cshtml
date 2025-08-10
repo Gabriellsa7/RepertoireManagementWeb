@@ -6,7 +6,10 @@
 
 <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 
-<h1>Repertoire Musics: @Model.Repertoire.Name</h1>
+<h1>@Model.Repertoire.Name</h1>
+<hr/>
+
+<h4 class="primary-text-color fw-bold px-2">Musics</h4>
 @if (Model.MusicLinks.Any())
 {
     <table class="table">

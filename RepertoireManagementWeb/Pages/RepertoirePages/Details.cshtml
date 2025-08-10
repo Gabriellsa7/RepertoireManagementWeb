@@ -33,11 +33,14 @@
         </dd>
     </dl>
 </div>
-<div>
+<div class="d-flex gap-2">
     @if (leaderId == loggedUserId)
     {
-        <a class="btn btn-main" asp-page="./Edit" asp-route-id="@Model.Repertoire.Id">Edit</a>
+        <div>
+            <a class="btn btn-main" asp-page="./Edit" asp-route-id="@Model.Repertoire.Id">Edit</a> |
+        </div>
     }
+    <a asp-page="./ListMusics" asp-route-repertoireId="@Model.Repertoire.Id" class="btn btn-main">See Musics</a>
 </div>
 <hr />
 <div>
