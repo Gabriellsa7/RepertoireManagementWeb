@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 
 <h1>@Model.Repertoire.Name</h1>
-<hr/>
+<hr />
 
 <h4 class="primary-text-color fw-bold px-2">Musics</h4>
 @if (Model.MusicLinks.Any())
@@ -15,7 +15,7 @@
     <table class="table">
         <thead>
             <tr class="primary-text-color">
-                <th>Order</th>
+                <th>Music Info</th>
                 <th>Title</th>
                 <th>Image</th>
             </tr>
@@ -24,7 +24,12 @@
             @foreach (var link in Model.MusicLinks)
             {
                 <tr class="primary-text-color">
-                    <td>@link.OrderInRepertoire</td>
+                    @* <td>@link.OrderInRepertoire</td> *@
+                    <td>
+                        <a class="text-details" asp-page="/MusicPages/Details" asp-route-id="@link.Music.Id">
+                            Music Info: @link.Music.Title
+                        </a>
+                    </td>
                     <td>@link.Music?.Title</td>
                     <td>
                         @if (!string.IsNullOrEmpty(link.Music?.ImageUrl))

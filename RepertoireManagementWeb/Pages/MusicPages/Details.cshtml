@@ -63,4 +63,6 @@
 
 </div>
 <hr class="primary-text-color"/>
-<a asp-page="Index" class="btn btn-main">Back</a>
+<a class="btn btn-main" href="@(string.IsNullOrEmpty(Model.PreviousPageUrl) ? Url.Page("/Index") : Model.PreviousPageUrl)">Back</a>
+
+@* <a asp-page="Index" class="btn btn-main">Back</a> *@

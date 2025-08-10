@@ -21,6 +21,8 @@ namespace RepertoireManagementWeb.Pages.MusicPages
 
         public Music Music { get; set; } = default!;
 
+        public string? PreviousPageUrl { get; set; }
+
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
@@ -40,8 +42,12 @@ namespace RepertoireManagementWeb.Pages.MusicPages
             }
 
             Music = music;
+
+            PreviousPageUrl = Request.Headers["Referer"].ToString();
+
             return Page();
         }
+
 
     }
 }
