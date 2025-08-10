@@ -108,3 +108,25 @@
     font-size: 1.25rem;
     font-weight: bold;
 }
+
+
+.custom-menu {
+    background-color: var(--background-color); /* Same as your site background */
+    border-radius: 10px;
+    width: 70%; /* Wider horizontally */
+    max-width: 800px;
+    margin: 0 auto; /* Center horizontally */
+}
+
+    .custom-menu .list-group-item {
+        background-color: var(--background-color); /* Match background */
+        color: #fff;
+        border: 1px solid #2a2d34; /* Subtle border */
+        font-size: 1.1rem;
+        padding: 15px 20px;
+    }
+
+        .custom-menu .list-group-item:hover {
+            background-color: var(--background-color); /* Slightly lighter hover */
+            color: #00d1b2; /* Accent color */
+        }

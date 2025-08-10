@@ -8,7 +8,7 @@
 
 <div class="container text-center mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <a asp-page="/Index" class="btn btn-outline-primary">Back</a>
+        <a asp-page="/Index" class="btn btn-main">Back</a>
         <form method="post" asp-page-handler="Logout">
             <button type="submit" class="btn btn-outline-danger">Logout</button>
         </form>
@@ -33,6 +33,23 @@
                 Edit Profile
             </a>
         </div>
+    </div>
+    <div class="list-group text-start custom-menu">
+        <a asp-page="/UserPages/Details" asp-route-id="@Model.UserId" class="list-group-item list-group-item-action">
+            👤 My Infos
+        </a>
+        <a asp-page="/BandPages/Index" class="list-group-item list-group-item-action">
+            🎵 My Bands
+        </a>
+        <a asp-page="/MusicPages/Index" class="list-group-item list-group-item-action">
+            🎼 My Songs
+        </a>
+        <a asp-page="/RepertoirePages/Index" class="list-group-item list-group-item-action">
+            📜 My Repertoires
+        </a>
+        <a asp-page="/SettingsPages/Index" class="list-group-item list-group-item-action">
+            ⚙️ Settings
+        </a>
     </div>
     @* <div>
         <form method="post" enctype="multipart/form-data" asp-page-handler="UploadImage">
