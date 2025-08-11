@@ -53,9 +53,15 @@ namespace RepertoireManagementWeb.Pages.RepertoirePages
                 .Select(rm => rm.MusicId)
                 .ToListAsync();
 
+            //Songs that aren’t in any repertoire
             var availableMusics = await _context.Musics
-                .Where(m => !linkedMusicIds.Contains(m.Id))
+                .Where(m => !_context.RepertoireMusics.Any(rm => rm.MusicId == m.Id))
                 .ToListAsync();
+
+            MusicOptions = availableMusics
+                .Select(m => new SelectListItem { Value = m.Id.ToString(), Text = m.Title })
+                .ToList();
+
 
             MusicOptions = availableMusics
                 .Select(m => new SelectListItem { Value = m.Id.ToString(), Text = m.Title })
