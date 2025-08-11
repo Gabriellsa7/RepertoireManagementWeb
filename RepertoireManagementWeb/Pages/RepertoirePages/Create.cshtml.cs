@@ -21,7 +21,16 @@ namespace RepertoireManagementWeb.Pages.RepertoirePages
 
         public IActionResult OnGet()
         {
-        ViewData["BandId"] = new SelectList(_context.Bands, "Id", "Name");
+            var userIdStr = HttpContext.Session.GetString("UserId");
+            if (!Guid.TryParse(userIdStr, out Guid userId))
+                return Unauthorized();
+
+            var userBands = _context.Bands
+                .Where(b => b.LeaderId == userId || b.Members.Any(m => m.Id == userId))
+                .ToList();
+
+            ViewData["BandId"] = new SelectList(userBands, "Id", "Name");
+
             return Page();
         }
 
