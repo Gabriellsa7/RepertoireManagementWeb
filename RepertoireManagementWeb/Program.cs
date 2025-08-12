@@ -1,6 +1,7 @@
 ﻿using RepertoireManagementWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using RepertoireManagementWeb.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +19,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
+
+app.MapHub<ShowHub>("/showHub");
 
 if (!app.Environment.IsDevelopment())
 {

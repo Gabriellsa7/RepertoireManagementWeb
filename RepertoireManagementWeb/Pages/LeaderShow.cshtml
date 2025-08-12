@@ -1,0 +1,39 @@
+﻿@page "/LeaderShow/{bandId:guid}/{repertoireId:guid}"
+@model LeaderShowModel
+@{
+    ViewData["Title"] = "Controle do Show";
+}
+
+<h1>Controle do Show - @Model.BandName</h1>
+
+<div>
+    <h3>Repertório: @Model.RepertoireName</h3>
+    <ul>
+        @foreach (var music in Model.Musics)
+        {
+            <li>
+                <button class="btn btn-primary"
+                        onclick="changeSong('@music.Title', `@music.Lyrics?.Replace("`", "\\`")`)">
+                    @music.Title
+                </button>
+            </li>
+        }
+    </ul>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script>
+    const bandId = "@Model.BandId";
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/showHub")
+        .build();
+
+    connection.start().then(() => {
+        connection.invoke("JoinBand", bandId);
+    });
+
+    function changeSong(title, lyrics) {
+        connection.invoke("ChangeSong", bandId, title, lyrics);
+    }
+</script>

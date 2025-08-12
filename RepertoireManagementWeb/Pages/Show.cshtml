@@ -1,0 +1,32 @@
+﻿@page "/Show/{bandId:guid}/{repertoireId:guid}"
+@model ShowModel
+@{
+    ViewData["Title"] = "Show";
+}
+
+
+<h1>Show</h1>
+
+<div id="song-container">
+    <h2 id="song-title">@Model.CurrentSongTitle</h2>
+    <pre id="song-lyrics">@Model.CurrentSongLyrics</pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script>
+    const bandId = "@Model.BandId";
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/showHub")
+        .build();
+
+    connection.on("ReceiveSong", (title, lyrics) => {
+        document.getElementById("song-title").innerText = title;
+        document.getElementById("song-lyrics").innerText = lyrics;
+    });
+
+    connection.start().then(() => {
+        connection.invoke("JoinBand", bandId);
+    });
+</script>
+

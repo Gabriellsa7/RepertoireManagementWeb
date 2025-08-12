@@ -19,7 +19,7 @@ namespace RepertoireManagementWeb.Pages.BandPages
             _context = context;
         }
 
-        public IList<Band> Band { get;set; } = default!;
+        public IList<Band> Band { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
@@ -34,8 +34,9 @@ namespace RepertoireManagementWeb.Pages.BandPages
             Band = await _context.Bands
                 .Include(b => b.Leader)
                 .Include(b => b.Members)
+                .Include(b => b.Repertoires)
                 .Where(b =>
-                    b.LeaderId == userId ||             
+                    b.LeaderId == userId ||
                     b.Members.Any(m => m.Id == userId)
                 )
                 .ToListAsync();

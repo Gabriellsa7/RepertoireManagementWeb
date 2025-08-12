@@ -55,6 +55,20 @@
                         }
                         <a class="text-details" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                         <a class="text-details" asp-page="./MemberPage/ListMembers" asp-route-bandId="@item.Id">See Members</a> |
+                        @if (item.LeaderId == loggedUserId && item.Repertoires.Any())
+                        {
+                            var firstRepertoire = item.Repertoires.First();
+                            <a class="text-details" asp-page="/LeaderShow"
+                               asp-route-bandId="@item.Id"
+                               asp-route-repertoireId="@firstRepertoire.Id">Start Show</a>
+                        }
+                        @if (item.Repertoires.Any())
+                        {
+                            var firstRepertoire = item.Repertoires.First();
+                            <a class="text-details" asp-page="/Show"
+                               asp-route-bandId="@item.Id"
+                               asp-route-repertoireId="@firstRepertoire.Id">Join Show</a>
+                        }
                     </div>
                 </td>
             </tr>
