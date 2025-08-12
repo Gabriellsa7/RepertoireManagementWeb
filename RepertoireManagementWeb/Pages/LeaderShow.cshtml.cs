@@ -31,7 +31,7 @@ public class LeaderShowModel : PageModel
             .FirstOrDefaultAsync(b => b.Id == BandId);
 
         if (band == null)
-            return NotFound("Banda não encontrada.");
+            return NotFound("Band Not Found.");
 
         BandName = band.Name;
 
@@ -39,7 +39,7 @@ public class LeaderShowModel : PageModel
             .FirstOrDefault(r => r.Id == RepertoireId);
 
         if (repertoire == null)
-            return NotFound("Repertório não encontrado.");
+            return NotFound("Repertoire Not Found.");
 
         RepertoireName = repertoire.Name;
 

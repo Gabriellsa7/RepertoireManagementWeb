@@ -23,7 +23,7 @@ namespace RepertoireManagementWeb.Pages
         [BindProperty(SupportsGet = true)]
         public Guid RepertoireId { get; set; }
 
-        public string CurrentSongTitle { get; set; } = "Aguardando início...";
+        public string CurrentSongTitle { get; set; } = "Waiting...";
         public string CurrentSongPdfUrl { get; set; } = "";
 
         public async Task<IActionResult> OnGetAsync()
@@ -32,7 +32,7 @@ namespace RepertoireManagementWeb.Pages
                 .AnyAsync(b => b.Id == BandId);
 
             if (!bandExists)
-                return NotFound("Banda não encontrada");
+                return NotFound("Band Not Found");
 
             var firstMusic = await _context.RepertoireMusics
                 .Where(rm => rm.RepertoireId == RepertoireId)
