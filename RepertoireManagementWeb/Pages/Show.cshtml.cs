@@ -24,7 +24,7 @@ namespace RepertoireManagementWeb.Pages
         public Guid RepertoireId { get; set; }
 
         public string CurrentSongTitle { get; set; } = "Aguardando início...";
-        public string CurrentSongLyrics { get; set; } = "";
+        public string CurrentSongPdfUrl { get; set; } = "";
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -43,7 +43,7 @@ namespace RepertoireManagementWeb.Pages
             if (firstMusic != null)
             {
                 CurrentSongTitle = firstMusic.Title;
-                CurrentSongLyrics = "Letra da música aqui...";
+                CurrentSongPdfUrl = $"/MusicPages/PdfDownload?id={firstMusic.Id}";
             }
 
             return Page();

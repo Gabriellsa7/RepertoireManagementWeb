@@ -13,12 +13,16 @@
         {
             <li>
                 <button class="btn btn-primary"
-                        onclick="changeSong('@music.Title', `@music.Lyrics?.Replace("`", "\\`")`)">
+                        onclick="changeSong('@music.Id')">
                     @music.Title
                 </button>
             </li>
         }
     </ul>
+
+    <h4 id="leader-current-title">@Model.Musics.FirstOrDefault()?.Title</h4>
+    <iframe id="leader-song-pdf" src="@($"/MusicPages/PdfDownload?id={@Model.Musics.FirstOrDefault()?.Id}")"
+            width="100%" height="600px" style="border:1px solid #ccc;"></iframe>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
@@ -29,11 +33,17 @@
         .withUrl("/showHub")
         .build();
 
-    connection.start().then(() => {
-        connection.invoke("JoinBand", bandId);
+    connection.on("ReceiveSong", (title, pdfUrl) => {
+        document.getElementById("leader-current-title").innerText = title ?? "";
+        document.getElementById("leader-song-pdf").src = pdfUrl ?? "";
     });
 
-    function changeSong(title, lyrics) {
-        connection.invoke("ChangeSong", bandId, title, lyrics);
+    connection.start()
+        .then(() => connection.invoke("JoinBand", bandId))
+        .catch(err => console.error(err));
+
+    function changeSong(musicId) {
+        connection.invoke("ChangeSong", bandId, musicId)
+            .catch(err => console.error(err));
     }
 </script>

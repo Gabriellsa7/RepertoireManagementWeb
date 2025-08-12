@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RepertoireManagementWeb.Data;
-using RepertoireManagementWeb.Models;
 
 public class LeaderShowModel : PageModel
 {
@@ -47,8 +46,8 @@ public class LeaderShowModel : PageModel
         Musics = repertoire.MusicLinks
             .Select(rm => new MusicViewModel
             {
-                Title = rm.Music.Title,
-                Lyrics = "Letra da música aqui..."
+                Id = rm.Music.Id,
+                Title = rm.Music.Title
             })
             .ToList();
 
@@ -57,7 +56,7 @@ public class LeaderShowModel : PageModel
 
     public class MusicViewModel
     {
-        public string Title { get; set; }
-        public string? Lyrics { get; set; }
+        public Guid Id { get; set; }
+        public string Title { get; set; } = string.Empty;
     }
 }

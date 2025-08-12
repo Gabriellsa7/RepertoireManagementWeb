@@ -4,12 +4,12 @@
     ViewData["Title"] = "Show";
 }
 
-
 <h1>Show</h1>
 
 <div id="song-container">
     <h2 id="song-title">@Model.CurrentSongTitle</h2>
-    <pre id="song-lyrics">@Model.CurrentSongLyrics</pre>
+    <iframe id="song-iframe" src="@Model.CurrentSongPdfUrl"
+            width="100%" height="600px" style="border:1px solid #ccc;"></iframe>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
@@ -20,13 +20,12 @@
         .withUrl("/showHub")
         .build();
 
-    connection.on("ReceiveSong", (title, lyrics) => {
-        document.getElementById("song-title").innerText = title;
-        document.getElementById("song-lyrics").innerText = lyrics;
+    connection.on("ReceiveSong", (title, pdfUrl) => {
+        document.getElementById("song-title").innerText = title ?? "";
+        document.getElementById("song-iframe").src = pdfUrl ?? "";
     });
 
-    connection.start().then(() => {
-        connection.invoke("JoinBand", bandId);
-    });
+    connection.start()
+        .then(() => connection.invoke("JoinBand", bandId))
+        .catch(err => console.error(err));
 </script>
-
