@@ -58,10 +58,13 @@
                         @if (item.LeaderId == loggedUserId && item.Repertoires.Any())
                         {
                             var firstRepertoire = item.Repertoires.First();
-                            <a class="text-details" asp-page="/LeaderShow"
-                               asp-route-bandId="@item.Id"
-                               asp-route-repertoireId="@firstRepertoire.Id">Start Show</a>
+                            <div>
+                                <a class="text-details" asp-page="/LeaderShow"
+                                   asp-route-bandId="@item.Id"
+                                   asp-route-repertoireId="@firstRepertoire.Id">Start Show</a> |
+                            </div>
                         }
+
                         @if (item.Repertoires.Any())
                         {
                             var firstRepertoire = item.Repertoires.First();
@@ -69,6 +72,7 @@
                                asp-route-bandId="@item.Id"
                                asp-route-repertoireId="@firstRepertoire.Id">Join Show</a>
                         }
+                        |
                     </div>
                 </td>
             </tr>
