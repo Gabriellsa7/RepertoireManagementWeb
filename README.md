@@ -26,6 +26,7 @@ The system also includes real-time synchronization, allowing the band leader—d
 - **Entity Framework Core** for database access
 - **C#** for backend logic
 - **Bootstrap** for responsive UI
+- DataBase: SQLServer
 
 ## 🚀 How to Run
 
