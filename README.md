@@ -1,7 +1,8 @@
 ﻿# Repertoire Management
 
-Repertoire Management is an ASP.NET Razor Pages web application developed for the Web 2 course project.  
+Repertoire Management is an ASP.NET Razor Pages web application developed for the Web 2 course project.
 It is designed to help musicians manage bands, songs, and repertoires for live performances.
+The system also includes real-time synchronization, allowing the band leader—during a live show—to instantly change the song, which updates for all members simultaneously, ensuring everyone stays on the same page during the performance.
 
 ## 🎯 Features
 
