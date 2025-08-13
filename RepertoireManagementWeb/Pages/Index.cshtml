@@ -110,7 +110,7 @@
                         <div class="card-overlay">
                             <img src="@(!string.IsNullOrEmpty(b.ImageUrl) ? b.ImageUrl : "/img/default-band.jpg")" alt="@b.Name">
                             <div class="overlay-content">
-                                <a asp-page="/BandPages/Details" asp-route-id="@b.Id" class="btn btn-light">View</a>
+                                <a asp-page="/BandPages/Details" asp-route-id="@b.Id" class="btn btn-main">View</a>
                             </div>
                         </div>
                         <p class="item-name">@b.Name</p>
@@ -134,7 +134,7 @@
                         <div class="card-overlay">
                             <img src="@(!string.IsNullOrEmpty(r.ImageUrl) ? r.ImageUrl : "/img/default-repertoire.jpg")" alt="@r.Name">
                             <div class="overlay-content">
-                                <a asp-page="/RepertoirePages/Details" asp-route-id="@r.Id" class="btn btn-light">View</a>
+                                <a asp-page="/RepertoirePages/Details" asp-route-id="@r.Id" class="btn btn-main">View</a>
                             </div>
                         </div>
                         <p class="item-name">@r.Name</p>
@@ -158,7 +158,7 @@
                         <div class="card-overlay">
                             <img src="@(!string.IsNullOrEmpty(m.ImageUrl) ? m.ImageUrl : "/img/default-music.jpg")" alt="@m.Title">
                             <div class="overlay-content">
-                                <a asp-page="/MusicPages/Details" asp-route-id="@m.Id" class="btn btn-light">View</a>
+                                <a asp-page="/MusicPages/Details" asp-route-id="@m.Id" class="btn btn-main">View</a>
                             </div>
                         </div>
                         <p class="item-name">@m.Title</p>
