@@ -4,28 +4,36 @@
     ViewData["Title"] = "Controle do Show";
 }
 
-<h1>Controle do Show - @Model.BandName</h1>
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+
+<h2>Band - @Model.BandName</h2>
 
 <div>
-    <h3>Repertório: @Model.RepertoireName</h3>
-    <ul>
-        @foreach (var music in Model.Musics)
-        {
-            <li>
-                <button class="btn btn-primary"
+    <hr />
+    <span class="fs-3">Repertório: @Model.RepertoireName</span>
+    <hr />
+    <div class="d-flex flex-column gap-3 my-3">
+        <span class="fw-bold fs-5">Musics</span>
+        <div class="d-flex flex-row gap-3">
+            @foreach (var music in Model.Musics)
+            {
+
+                <button class="btn btn-main"
                         onclick="changeSong('@music.Id')">
                     @music.Title
                 </button>
-            </li>
-        }
-    </ul>
 
-    <h4 id="leader-current-title">@Model.Musics.FirstOrDefault()?.Title</h4>
-    <iframe id="leader-song-pdf" src="@($"/MusicPages/PdfDownload?id={@Model.Musics.FirstOrDefault()?.Id}")"
-            width="100%" height="600px" style="border:1px solid #ccc;"></iframe>
+            }
+        </div>
+    </div>
+    <div class="d-flex flex-column gap-2">
+        <span class="fs-4" id="leader-current-title">@Model.Musics.FirstOrDefault()?.Title</span>
+        <iframe id="leader-song-pdf" src="@($"/MusicPages/PdfDownload?id={@Model.Musics.FirstOrDefault()?.Id}")"
+                width="100%" height="600px" style="border:1px solid #ccc;"></iframe>
+    </div>
 </div>
 
-<hr/>
+<hr />
 <a asp-page="/BandPages/Index" class="btn btn-main">Back</a>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>

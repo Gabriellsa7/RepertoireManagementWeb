@@ -4,10 +4,10 @@
     ViewData["Title"] = "Show";
 }
 
-<h1>Show</h1>
-
-<div id="song-container">
-    <h2 id="song-title">@Model.CurrentSongTitle</h2>
+<h2>Show</h2>
+<hr/>
+<div id="song-container" class="d-flex flex-column gap-2 mb-4">
+    <span class="fs-4" id="song-title">@Model.CurrentSongTitle</span>
     <iframe id="song-iframe" src="@Model.CurrentSongPdfUrl"
             width="100%" height="600px" style="border:1px solid #ccc;"></iframe>
 </div>
