@@ -13,6 +13,7 @@
             opacity: 0;
             transform: translateY(10px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -32,20 +33,20 @@
         transition: transform 0.3s ease;
     }
 
-    .card-overlay:hover {
-        transform: translateY(-5px);
-    }
+        .card-overlay:hover {
+            transform: translateY(-5px);
+        }
 
-    .card-overlay img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-    }
+        .card-overlay img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
 
-    .card-overlay:hover img {
-        transform: scale(1.05);
-    }
+        .card-overlay:hover img {
+            transform: scale(1.05);
+        }
 
     .overlay-content {
         position: absolute;
@@ -101,12 +102,12 @@
 
         <!-- Bands -->
         <div class="section-title">Bands</div>
-        <div class="row">
+        <div class="horizontal-scroll">
             @if (Model.AllBands.Any())
             {
                 foreach (var b in Model.AllBands)
                 {
-                    <div class="col-md-3 mb-4 fade-in">
+                    <div class="scroll-item fade-in">
                         <div class="card-overlay">
                             <img src="@(!string.IsNullOrEmpty(b.ImageUrl) ? b.ImageUrl : "/img/default-band.jpg")" alt="@b.Name">
                             <div class="overlay-content">
@@ -125,12 +126,12 @@
 
         <!-- Repertoires -->
         <div class="section-title">Repertoires</div>
-        <div class="row">
+        <div class="horizontal-scroll">
             @if (Model.AllRepertoires.Any())
             {
                 foreach (var r in Model.AllRepertoires)
                 {
-                    <div class="col-md-3 mb-4 fade-in">
+                    <div class="scroll-item fade-in">
                         <div class="card-overlay">
                             <img src="@(!string.IsNullOrEmpty(r.ImageUrl) ? r.ImageUrl : "/img/default-repertoire.jpg")" alt="@r.Name">
                             <div class="overlay-content">
@@ -149,12 +150,12 @@
 
         <!-- Music -->
         <div class="section-title">Music</div>
-        <div class="row">
+        <div class="horizontal-scroll">
             @if (Model.AllMusic.Any())
             {
                 foreach (var m in Model.AllMusic)
                 {
-                    <div class="col-md-3 mb-4 fade-in">
+                    <div class="scroll-item fade-in">
                         <div class="card-overlay">
                             <img src="@(!string.IsNullOrEmpty(m.ImageUrl) ? m.ImageUrl : "/img/default-music.jpg")" alt="@m.Title">
                             <div class="overlay-content">
@@ -170,5 +171,6 @@
                 <p class="text-muted">No music found.</p>
             }
         </div>
+
     }
 </div>
