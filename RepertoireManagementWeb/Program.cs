@@ -20,6 +20,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
 builder.Services.AddSignalR();
+builder.Services.AddServerSideBlazor();
 
 var app = builder.Build();
 
@@ -42,5 +43,6 @@ app.UseSession();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapBlazorHub();
 
 app.Run();

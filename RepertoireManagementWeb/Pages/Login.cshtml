@@ -23,10 +23,9 @@
                     <label>Password</label>
                     <input asp-for="LoginPassword" class="form-control" type="password" />
                 </div>
-                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-                {
-                    <div class="text-danger">@Model.ErrorMessage</div>
-                }
+                <component type="typeof(RepertoireManagementWeb.Components.LoginError)"
+                           render-mode="ServerPrerendered"
+                           param-Message="Model.ErrorMessage" />
                 <button type="submit" class="btn btn-main mt-2">Login</button>
             </div>
         </form>
@@ -37,9 +36,3 @@
     </div>
 
 </div>
-
-
-@if (Model.ErrorMessage != null)
-{
-    <div class="alert alert-danger mt-2">@Model.ErrorMessage</div>
-}
